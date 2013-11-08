@@ -1,11 +1,3 @@
-//
-//  DetailViewController.m
-//  Noted
-//
-//  Created by Nicholas Kostelnik on 08/11/2013.
-//  Copyright (c) 2013 Nicholas Kostelnik. All rights reserved.
-//
-
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
@@ -16,8 +8,7 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
-{
+- (void)setDetailItem:(id)newDetailItem {
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
         
@@ -26,8 +17,7 @@
     }
 }
 
-- (void)configureView
-{
+- (void)configureView {
     // Update the user interface for the detail item.
 
   if (self.detailItem) {
@@ -35,15 +25,13 @@
   }
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void)viewDidLoad {
+  [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
   [self configureView];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
