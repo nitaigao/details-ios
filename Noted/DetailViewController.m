@@ -7,19 +7,31 @@
 #pragma mark - Managing the detail item
 
 - (void)viewWillDisappear:(BOOL)animated {
+  
   DBFileInfo* fileInfo = self.detailItem;
-  DBError* error = nil;
   
-  DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
-  
-  if (error) {
-    NSLog(@"%@", error);
+  if (self.noteTextView.text.length > 0) {
+    DBError* error = nil;
+    
+    DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
+    
+    if (error) {
+      NSLog(@"%@", error);
+    }
+    
+    [file writeString:self.noteTextView.text error:&error];
+    
+    if (error) {
+      NSLog(@"%@", error);
+    }
   }
-  
-  [file writeString:self.noteTextView.text error:&error];
-  
-  if (error) {
-    NSLog(@"%@", error);
+  else {
+    DBError* error = nil;
+    [[DBFilesystem sharedFilesystem] deletePath:fileInfo.path error:&error];
+    
+    if (error) {
+      NSLog(@"%@", error);
+    }
   }
   
   [self.navigationController popToRootViewControllerAnimated:YES];
