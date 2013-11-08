@@ -1,6 +1,6 @@
 #import "DetailViewController.h"
 
-#import "../Dropbox.framework/Headers/Dropbox.h"
+#import <Dropbox/Dropbox.h>
 
 @implementation DetailViewController
 

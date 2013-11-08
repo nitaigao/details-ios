@@ -1,8 +1,8 @@
 #import "MasterViewController.h"
 
-#import "DetailViewController.h"
+#import <Dropbox/Dropbox.h>
 
-#import "../Dropbox.framework/Headers/Dropbox.h"
+#import "DetailViewController.h"
 
 @interface MasterViewController () {
   NSMutableArray *notes;

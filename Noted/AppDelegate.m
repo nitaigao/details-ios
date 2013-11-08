@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 
-#import "../Dropbox.framework/Headers/Dropbox.h"
+#import <Dropbox/Dropbox.h>
 
 #import "MasterViewController.h"
 

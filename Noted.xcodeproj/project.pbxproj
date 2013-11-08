@@ -22,12 +22,12 @@
 		4C1AF2C1182CD63F000CE129 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2A0182CD63F000CE129 /* UIKit.framework */; };
 		4C1AF2C9182CD63F000CE129 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C1AF2C7182CD63F000CE129 /* InfoPlist.strings */; };
 		4C1AF2CB182CD63F000CE129 /* NotedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF2CA182CD63F000CE129 /* NotedTests.m */; };
-		4C1AF2DF182CD874000CE129 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2DE182CD874000CE129 /* Dropbox.framework */; };
 		4C1AF2E1182CD95C000CE129 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E0182CD95C000CE129 /* CFNetwork.framework */; };
 		4C1AF2E3182CD967000CE129 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E2182CD967000CE129 /* Security.framework */; };
 		4C1AF2E5182CD96E000CE129 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */; };
 		4C1AF2E7182CD973000CE129 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E6182CD973000CE129 /* QuartzCore.framework */; };
 		4C1AF2E9182CD97B000CE129 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E8182CD97B000CE129 /* libc++.dylib */; };
+		F2FC91A4EFA94432A7726404 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1384A784CDA4FF58776B521 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,12 +62,13 @@
 		4C1AF2C6182CD63F000CE129 /* NotedTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotedTests-Info.plist"; sourceTree = "<group>"; };
 		4C1AF2C8182CD63F000CE129 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C1AF2CA182CD63F000CE129 /* NotedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotedTests.m; sourceTree = "<group>"; };
-		4C1AF2DE182CD874000CE129 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
 		4C1AF2E0182CD95C000CE129 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4C1AF2E2182CD967000CE129 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4C1AF2E6182CD973000CE129 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4C1AF2E8182CD97B000CE129 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		BB3E934E84CA46C1B84C6044 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		D1384A784CDA4FF58776B521 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,10 +81,10 @@
 				4C1AF2E5182CD96E000CE129 /* SystemConfiguration.framework in Frameworks */,
 				4C1AF2E3182CD967000CE129 /* Security.framework in Frameworks */,
 				4C1AF2E1182CD95C000CE129 /* CFNetwork.framework in Frameworks */,
-				4C1AF2DF182CD874000CE129 /* Dropbox.framework in Frameworks */,
 				4C1AF29F182CD63F000CE129 /* CoreGraphics.framework in Frameworks */,
 				4C1AF2A1182CD63F000CE129 /* UIKit.framework in Frameworks */,
 				4C1AF29D182CD63F000CE129 /* Foundation.framework in Frameworks */,
+				F2FC91A4EFA94432A7726404 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +108,7 @@
 				4C1AF2C4182CD63F000CE129 /* NotedTests */,
 				4C1AF29B182CD63F000CE129 /* Frameworks */,
 				4C1AF29A182CD63F000CE129 /* Products */,
+				BB3E934E84CA46C1B84C6044 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,11 +129,11 @@
 				4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */,
 				4C1AF2E2182CD967000CE129 /* Security.framework */,
 				4C1AF2E0182CD95C000CE129 /* CFNetwork.framework */,
-				4C1AF2DE182CD874000CE129 /* Dropbox.framework */,
 				4C1AF29C182CD63F000CE129 /* Foundation.framework */,
 				4C1AF29E182CD63F000CE129 /* CoreGraphics.framework */,
 				4C1AF2A0182CD63F000CE129 /* UIKit.framework */,
 				4C1AF2BE182CD63F000CE129 /* XCTest.framework */,
+				D1384A784CDA4FF58776B521 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -204,9 +206,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C1AF2CE182CD63F000CE129 /* Build configuration list for PBXNativeTarget "Noted" */;
 			buildPhases = (
+				95CFC71000A94E168FA23AAD /* Check Pods Manifest.lock */,
 				4C1AF295182CD63F000CE129 /* Sources */,
 				4C1AF296182CD63F000CE129 /* Frameworks */,
 				4C1AF297182CD63F000CE129 /* Resources */,
+				360CCA5AA2FB44D2888C99C8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -288,6 +292,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		360CCA5AA2FB44D2888C99C8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		95CFC71000A94E168FA23AAD /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4C1AF295182CD63F000CE129 /* Sources */ = {
@@ -421,6 +458,7 @@
 		};
 		4C1AF2CF182CD63F000CE129 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB3E934E84CA46C1B84C6044 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -439,6 +477,7 @@
 		};
 		4C1AF2D0182CD63F000CE129 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB3E934E84CA46C1B84C6044 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
