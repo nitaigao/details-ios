@@ -1,39 +1,59 @@
 #import "DetailViewController.h"
 
-@interface DetailViewController ()
-- (void)configureView;
-@end
+#import "../Dropbox.framework/Headers/Dropbox.h"
 
 @implementation DetailViewController
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-        [self configureView];
-    }
+- (void)viewWillDisappear:(BOOL)animated {
+  DBFileInfo* fileInfo = self.detailItem;
+  DBError* error = nil;
+  
+  DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
+  
+  if (error) {
+    NSLog(@"%@", error);
+  }
+  
+  [file writeString:self.noteTextView.text error:&error];
+  
+  if (error) {
+    NSLog(@"%@", error);
+  }
+  
+  [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (void)configureView {
-    // Update the user interface for the detail item.
-
-  if (self.detailItem) {
-      self.detailDescriptionLabel.text = [self.detailItem description];
+- (void)setDetailItem:(id)newDetailItem {
+  if (_detailItem != newDetailItem) {
+    _detailItem = newDetailItem;    
   }
 }
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-  [self configureView];
+- (void)viewWillAppear:(BOOL)animated {
+  if (self.detailItem) {
+    DBError* error = nil;
+    DBFileInfo* fileInfo = self.detailItem;
+    
+    DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
+    
+    if (error) {
+      NSLog(@"%@", error);
+    }
+    
+    NSString* fileContents = [file readString:&error];
+    
+    if (error) {
+      NSLog(@"%@", error);
+    }
+    
+    self.noteTextView.text = fileContents;
+  }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated {
+  [self.noteTextView becomeFirstResponder];
 }
 
 @end

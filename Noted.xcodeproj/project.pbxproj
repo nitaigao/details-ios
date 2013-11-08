@@ -22,6 +22,12 @@
 		4C1AF2C1182CD63F000CE129 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2A0182CD63F000CE129 /* UIKit.framework */; };
 		4C1AF2C9182CD63F000CE129 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C1AF2C7182CD63F000CE129 /* InfoPlist.strings */; };
 		4C1AF2CB182CD63F000CE129 /* NotedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF2CA182CD63F000CE129 /* NotedTests.m */; };
+		4C1AF2DF182CD874000CE129 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2DE182CD874000CE129 /* Dropbox.framework */; };
+		4C1AF2E1182CD95C000CE129 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E0182CD95C000CE129 /* CFNetwork.framework */; };
+		4C1AF2E3182CD967000CE129 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E2182CD967000CE129 /* Security.framework */; };
+		4C1AF2E5182CD96E000CE129 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */; };
+		4C1AF2E7182CD973000CE129 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E6182CD973000CE129 /* QuartzCore.framework */; };
+		4C1AF2E9182CD97B000CE129 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E8182CD97B000CE129 /* libc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +62,12 @@
 		4C1AF2C6182CD63F000CE129 /* NotedTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotedTests-Info.plist"; sourceTree = "<group>"; };
 		4C1AF2C8182CD63F000CE129 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C1AF2CA182CD63F000CE129 /* NotedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotedTests.m; sourceTree = "<group>"; };
+		4C1AF2DE182CD874000CE129 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
+		4C1AF2E0182CD95C000CE129 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4C1AF2E2182CD967000CE129 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4C1AF2E6182CD973000CE129 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4C1AF2E8182CD97B000CE129 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +75,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C1AF2E9182CD97B000CE129 /* libc++.dylib in Frameworks */,
+				4C1AF2E7182CD973000CE129 /* QuartzCore.framework in Frameworks */,
+				4C1AF2E5182CD96E000CE129 /* SystemConfiguration.framework in Frameworks */,
+				4C1AF2E3182CD967000CE129 /* Security.framework in Frameworks */,
+				4C1AF2E1182CD95C000CE129 /* CFNetwork.framework in Frameworks */,
+				4C1AF2DF182CD874000CE129 /* Dropbox.framework in Frameworks */,
 				4C1AF29F182CD63F000CE129 /* CoreGraphics.framework in Frameworks */,
 				4C1AF2A1182CD63F000CE129 /* UIKit.framework in Frameworks */,
 				4C1AF29D182CD63F000CE129 /* Foundation.framework in Frameworks */,
@@ -104,6 +122,12 @@
 		4C1AF29B182CD63F000CE129 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C1AF2E8182CD97B000CE129 /* libc++.dylib */,
+				4C1AF2E6182CD973000CE129 /* QuartzCore.framework */,
+				4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */,
+				4C1AF2E2182CD967000CE129 /* Security.framework */,
+				4C1AF2E0182CD95C000CE129 /* CFNetwork.framework */,
+				4C1AF2DE182CD874000CE129 /* Dropbox.framework */,
 				4C1AF29C182CD63F000CE129 /* Foundation.framework */,
 				4C1AF29E182CD63F000CE129 /* CoreGraphics.framework */,
 				4C1AF2A0182CD63F000CE129 /* UIKit.framework */,
@@ -115,13 +139,11 @@
 		4C1AF2A2182CD63F000CE129 /* Noted */ = {
 			isa = PBXGroup;
 			children = (
+				4C1AF2D7182CD70F000CE129 /* NoteList */,
+				4C1AF2D6182CD6FE000CE129 /* Edit */,
 				4C1AF2AB182CD63F000CE129 /* AppDelegate.h */,
 				4C1AF2AC182CD63F000CE129 /* AppDelegate.m */,
 				4C1AF2AE182CD63F000CE129 /* Main.storyboard */,
-				4C1AF2B1182CD63F000CE129 /* MasterViewController.h */,
-				4C1AF2B2182CD63F000CE129 /* MasterViewController.m */,
-				4C1AF2B4182CD63F000CE129 /* DetailViewController.h */,
-				4C1AF2B5182CD63F000CE129 /* DetailViewController.m */,
 				4C1AF2B7182CD63F000CE129 /* Images.xcassets */,
 				4C1AF2A3182CD63F000CE129 /* Supporting Files */,
 			);
@@ -155,6 +177,24 @@
 				4C1AF2C7182CD63F000CE129 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C1AF2D6182CD6FE000CE129 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				4C1AF2B4182CD63F000CE129 /* DetailViewController.h */,
+				4C1AF2B5182CD63F000CE129 /* DetailViewController.m */,
+			);
+			name = Edit;
+			sourceTree = "<group>";
+		};
+		4C1AF2D7182CD70F000CE129 /* NoteList */ = {
+			isa = PBXGroup;
+			children = (
+				4C1AF2B1182CD63F000CE129 /* MasterViewController.h */,
+				4C1AF2B2182CD63F000CE129 /* MasterViewController.m */,
+			);
+			name = NoteList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +424,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/nk/Development/Noted,
+					/Users/nk/Development/Noted/Noted,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Noted/Noted-Prefix.pch";
 				INFOPLIST_FILE = "Noted/Noted-Info.plist";
@@ -397,6 +442,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/nk/Development/Noted,
+					/Users/nk/Development/Noted/Noted,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Noted/Noted-Prefix.pch";
 				INFOPLIST_FILE = "Noted/Noted-Info.plist";
@@ -466,6 +516,7 @@
 				4C1AF2D0182CD63F000CE129 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4C1AF2D1182CD63F000CE129 /* Build configuration list for PBXNativeTarget "NotedTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +525,7 @@
 				4C1AF2D3182CD63F000CE129 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
