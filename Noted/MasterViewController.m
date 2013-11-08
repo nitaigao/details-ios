@@ -96,8 +96,6 @@
   } else if (editingStyle == UITableViewCellEditingStyleInsert) {
   }
   
-  
-  
   if (notes.count <= 0) {
     [self performSelector:@selector(finishEditing) withObject:nil afterDelay:0.1];
   }
