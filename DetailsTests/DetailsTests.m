@@ -1,18 +1,10 @@
-//
-//  NotedTests.m
-//  NotedTests
-//
-//  Created by Nicholas Kostelnik on 08/11/2013.
-//  Copyright (c) 2013 Nicholas Kostelnik. All rights reserved.
-//
-
 #import <XCTest/XCTest.h>
 
-@interface NotedTests : XCTestCase
+@interface DetailsTests : XCTestCase
 
 @end
 
-@implementation NotedTests
+@implementation DetailsTests
 
 - (void)setUp
 {

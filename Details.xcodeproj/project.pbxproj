@@ -21,7 +21,7 @@
 		4C1AF2C0182CD63F000CE129 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF29C182CD63F000CE129 /* Foundation.framework */; };
 		4C1AF2C1182CD63F000CE129 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2A0182CD63F000CE129 /* UIKit.framework */; };
 		4C1AF2C9182CD63F000CE129 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C1AF2C7182CD63F000CE129 /* InfoPlist.strings */; };
-		4C1AF2CB182CD63F000CE129 /* NotedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF2CA182CD63F000CE129 /* NotedTests.m */; };
+		4C1AF2CB182CD63F000CE129 /* DetailsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1AF2CA182CD63F000CE129 /* DetailsTests.m */; };
 		4C1AF2E1182CD95C000CE129 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E0182CD95C000CE129 /* CFNetwork.framework */; };
 		4C1AF2E3182CD967000CE129 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E2182CD967000CE129 /* Security.framework */; };
 		4C1AF2E5182CD96E000CE129 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */; };
@@ -36,19 +36,19 @@
 			containerPortal = 4C1AF291182CD63F000CE129 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4C1AF298182CD63F000CE129;
-			remoteInfo = Noted;
+			remoteInfo = Details;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4C1AF299182CD63F000CE129 /* Noted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noted.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C1AF299182CD63F000CE129 /* Details.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Details.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C1AF29C182CD63F000CE129 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4C1AF29E182CD63F000CE129 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4C1AF2A0182CD63F000CE129 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		4C1AF2A4182CD63F000CE129 /* Noted-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Noted-Info.plist"; sourceTree = "<group>"; };
+		4C1AF2A4182CD63F000CE129 /* Details-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Details-Info.plist"; sourceTree = "<group>"; };
 		4C1AF2A6182CD63F000CE129 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C1AF2A8182CD63F000CE129 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4C1AF2AA182CD63F000CE129 /* Noted-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Noted-Prefix.pch"; sourceTree = "<group>"; };
+		4C1AF2AA182CD63F000CE129 /* Details-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Details-Prefix.pch"; sourceTree = "<group>"; };
 		4C1AF2AB182CD63F000CE129 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4C1AF2AC182CD63F000CE129 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4C1AF2AF182CD63F000CE129 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,11 +57,11 @@
 		4C1AF2B4182CD63F000CE129 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		4C1AF2B5182CD63F000CE129 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		4C1AF2B7182CD63F000CE129 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4C1AF2BD182CD63F000CE129 /* NotedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C1AF2BD182CD63F000CE129 /* DetailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DetailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C1AF2BE182CD63F000CE129 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		4C1AF2C6182CD63F000CE129 /* NotedTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotedTests-Info.plist"; sourceTree = "<group>"; };
+		4C1AF2C6182CD63F000CE129 /* DetailsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DetailsTests-Info.plist"; sourceTree = "<group>"; };
 		4C1AF2C8182CD63F000CE129 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4C1AF2CA182CD63F000CE129 /* NotedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotedTests.m; sourceTree = "<group>"; };
+		4C1AF2CA182CD63F000CE129 /* DetailsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsTests.m; sourceTree = "<group>"; };
 		4C1AF2E0182CD95C000CE129 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4C1AF2E2182CD967000CE129 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -104,8 +104,8 @@
 		4C1AF290182CD63F000CE129 = {
 			isa = PBXGroup;
 			children = (
-				4C1AF2A2182CD63F000CE129 /* Noted */,
-				4C1AF2C4182CD63F000CE129 /* NotedTests */,
+				4C1AF2A2182CD63F000CE129 /* Details */,
+				4C1AF2C4182CD63F000CE129 /* DetailsTests */,
 				4C1AF29B182CD63F000CE129 /* Frameworks */,
 				4C1AF29A182CD63F000CE129 /* Products */,
 				BB3E934E84CA46C1B84C6044 /* Pods.xcconfig */,
@@ -115,8 +115,8 @@
 		4C1AF29A182CD63F000CE129 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4C1AF299182CD63F000CE129 /* Noted.app */,
-				4C1AF2BD182CD63F000CE129 /* NotedTests.xctest */,
+				4C1AF299182CD63F000CE129 /* Details.app */,
+				4C1AF2BD182CD63F000CE129 /* DetailsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,7 +138,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4C1AF2A2182CD63F000CE129 /* Noted */ = {
+		4C1AF2A2182CD63F000CE129 /* Details */ = {
 			isa = PBXGroup;
 			children = (
 				4C1AF2D7182CD70F000CE129 /* NoteList */,
@@ -149,33 +149,35 @@
 				4C1AF2B7182CD63F000CE129 /* Images.xcassets */,
 				4C1AF2A3182CD63F000CE129 /* Supporting Files */,
 			);
-			path = Noted;
+			name = Details;
+			path = Details;
 			sourceTree = "<group>";
 		};
 		4C1AF2A3182CD63F000CE129 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4C1AF2A4182CD63F000CE129 /* Noted-Info.plist */,
+				4C1AF2A4182CD63F000CE129 /* Details-Info.plist */,
 				4C1AF2A5182CD63F000CE129 /* InfoPlist.strings */,
 				4C1AF2A8182CD63F000CE129 /* main.m */,
-				4C1AF2AA182CD63F000CE129 /* Noted-Prefix.pch */,
+				4C1AF2AA182CD63F000CE129 /* Details-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4C1AF2C4182CD63F000CE129 /* NotedTests */ = {
+		4C1AF2C4182CD63F000CE129 /* DetailsTests */ = {
 			isa = PBXGroup;
 			children = (
-				4C1AF2CA182CD63F000CE129 /* NotedTests.m */,
+				4C1AF2CA182CD63F000CE129 /* DetailsTests.m */,
 				4C1AF2C5182CD63F000CE129 /* Supporting Files */,
 			);
-			path = NotedTests;
+			name = DetailsTests;
+			path = DetailsTests;
 			sourceTree = "<group>";
 		};
 		4C1AF2C5182CD63F000CE129 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4C1AF2C6182CD63F000CE129 /* NotedTests-Info.plist */,
+				4C1AF2C6182CD63F000CE129 /* DetailsTests-Info.plist */,
 				4C1AF2C7182CD63F000CE129 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -202,9 +204,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4C1AF298182CD63F000CE129 /* Noted */ = {
+		4C1AF298182CD63F000CE129 /* Details */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4C1AF2CE182CD63F000CE129 /* Build configuration list for PBXNativeTarget "Noted" */;
+			buildConfigurationList = 4C1AF2CE182CD63F000CE129 /* Build configuration list for PBXNativeTarget "Details" */;
 			buildPhases = (
 				95CFC71000A94E168FA23AAD /* Check Pods Manifest.lock */,
 				4C1AF295182CD63F000CE129 /* Sources */,
@@ -216,14 +218,14 @@
 			);
 			dependencies = (
 			);
-			name = Noted;
-			productName = Noted;
-			productReference = 4C1AF299182CD63F000CE129 /* Noted.app */;
+			name = Details;
+			productName = Details;
+			productReference = 4C1AF299182CD63F000CE129 /* Details.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4C1AF2BC182CD63F000CE129 /* NotedTests */ = {
+		4C1AF2BC182CD63F000CE129 /* DetailsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4C1AF2D1182CD63F000CE129 /* Build configuration list for PBXNativeTarget "NotedTests" */;
+			buildConfigurationList = 4C1AF2D1182CD63F000CE129 /* Build configuration list for PBXNativeTarget "DetailsTests" */;
 			buildPhases = (
 				4C1AF2B9182CD63F000CE129 /* Sources */,
 				4C1AF2BA182CD63F000CE129 /* Frameworks */,
@@ -234,9 +236,9 @@
 			dependencies = (
 				4C1AF2C3182CD63F000CE129 /* PBXTargetDependency */,
 			);
-			name = NotedTests;
-			productName = NotedTests;
-			productReference = 4C1AF2BD182CD63F000CE129 /* NotedTests.xctest */;
+			name = DetailsTests;
+			productName = DetailsTests;
+			productReference = 4C1AF2BD182CD63F000CE129 /* DetailsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -253,7 +255,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4C1AF294182CD63F000CE129 /* Build configuration list for PBXProject "Noted" */;
+			buildConfigurationList = 4C1AF294182CD63F000CE129 /* Build configuration list for PBXProject "Details" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -266,8 +268,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4C1AF298182CD63F000CE129 /* Noted */,
-				4C1AF2BC182CD63F000CE129 /* NotedTests */,
+				4C1AF298182CD63F000CE129 /* Details */,
+				4C1AF2BC182CD63F000CE129 /* DetailsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -342,7 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C1AF2CB182CD63F000CE129 /* NotedTests.m in Sources */,
+				4C1AF2CB182CD63F000CE129 /* DetailsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +353,7 @@
 /* Begin PBXTargetDependency section */
 		4C1AF2C3182CD63F000CE129 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4C1AF298182CD63F000CE129 /* Noted */;
+			target = 4C1AF298182CD63F000CE129 /* Details */;
 			targetProxy = 4C1AF2C2182CD63F000CE129 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -464,13 +466,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/nk/Development/Noted,
-					/Users/nk/Development/Noted/Noted,
+					/Users/nk/Development/Details,
+					/Users/nk/Development/Details/Details,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Noted/Noted-Prefix.pch";
-				INFOPLIST_FILE = "Noted/Noted-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
+				INFOPLIST_FILE = "Details/Details-Info.plist";
+				PRODUCT_NAME = Details;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -483,13 +485,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/nk/Development/Noted,
-					/Users/nk/Development/Noted/Noted,
+					/Users/nk/Development/Details,
+					/Users/nk/Development/Details/Details,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Noted/Noted-Prefix.pch";
-				INFOPLIST_FILE = "Noted/Noted-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
+				INFOPLIST_FILE = "Details/Details-Info.plist";
+				PRODUCT_NAME = Details;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -498,20 +500,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Noted.app/Noted";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Details.app/Details";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Noted/Noted-Prefix.pch";
+				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "NotedTests/NotedTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "DetailsTests/DetailsTests-Info.plist";
+				PRODUCT_NAME = DetailsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -521,16 +523,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Noted.app/Noted";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Details.app/Details";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Noted/Noted-Prefix.pch";
-				INFOPLIST_FILE = "NotedTests/NotedTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
+				INFOPLIST_FILE = "DetailsTests/DetailsTests-Info.plist";
+				PRODUCT_NAME = DetailsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -539,7 +541,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4C1AF294182CD63F000CE129 /* Build configuration list for PBXProject "Noted" */ = {
+		4C1AF294182CD63F000CE129 /* Build configuration list for PBXProject "Details" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4C1AF2CC182CD63F000CE129 /* Debug */,
@@ -548,7 +550,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4C1AF2CE182CD63F000CE129 /* Build configuration list for PBXNativeTarget "Noted" */ = {
+		4C1AF2CE182CD63F000CE129 /* Build configuration list for PBXNativeTarget "Details" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4C1AF2CF182CD63F000CE129 /* Debug */,
@@ -557,7 +559,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4C1AF2D1182CD63F000CE129 /* Build configuration list for PBXNativeTarget "NotedTests" */ = {
+		4C1AF2D1182CD63F000CE129 /* Build configuration list for PBXNativeTarget "DetailsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4C1AF2D2182CD63F000CE129 /* Debug */,
