@@ -12,12 +12,17 @@
 @implementation MasterViewController
 
 - (void)awakeFromNib {
-    [super awakeFromNib];
-  [[UINavigationBar appearance] setTitleTextAttributes:
-   [NSDictionary dictionaryWithObjectsAndKeys:
-    [UIColor darkGrayColor], NSForegroundColorAttributeName,
-    [UIFont fontWithName:@"ArialMT" size:16.0], NSFontAttributeName,nil]];
+  [super awakeFromNib];
 
+  [[UINavigationBar appearance] setTitleTextAttributes:
+    [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIColor darkGrayColor], NSForegroundColorAttributeName,
+      [UIFont fontWithName:@"ArialMT" size:16.0], NSFontAttributeName,nil]];
+
+  [self.editButtonItem setTitleTextAttributes:
+    [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIColor darkGrayColor], NSForegroundColorAttributeName,
+      [UIFont fontWithName:@"ArialMT" size:16.0], NSFontAttributeName,nil] forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad {
@@ -148,7 +153,7 @@
   [self performSegueWithIdentifier:@"showDetail" sender:self];
 }
 
-- (void)refreshNotes {
+- (void)refreshNotesBackground {
   DBError* error = nil;
   NSArray* folderContents = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&error];
   
@@ -164,6 +169,10 @@
   [notes addObjectsFromArray:sortedArray];
   
   [self.tableView reloadData];
+}
+
+- (void)refreshNotes {
+  [self performSelectorInBackground:@selector(refreshNotesBackground) withObject:nil];
 }
 
 - (IBAction)refreshNotes:(id)sender {
