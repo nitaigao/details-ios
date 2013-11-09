@@ -149,7 +149,6 @@
 				4C1AF2B7182CD63F000CE129 /* Images.xcassets */,
 				4C1AF2A3182CD63F000CE129 /* Supporting Files */,
 			);
-			name = Details;
 			path = Details;
 			sourceTree = "<group>";
 		};
@@ -170,7 +169,6 @@
 				4C1AF2CA182CD63F000CE129 /* DetailsTests.m */,
 				4C1AF2C5182CD63F000CE129 /* Supporting Files */,
 			);
-			name = DetailsTests;
 			path = DetailsTests;
 			sourceTree = "<group>";
 		};

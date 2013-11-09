@@ -6,6 +6,10 @@
 
 #pragma mark - Managing the detail item
 
+- (void)viewDidLoad {
+  [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+}
+
 - (void)saveNote {
   DBFileInfo* fileInfo = self.detailItem;
   
@@ -19,6 +23,7 @@
     }
     
     [file writeString:self.noteTextView.text error:&error];
+    [file close];
     
     if (error) {
       NSLog(@"%@", error);
@@ -112,7 +117,5 @@
     [self.noteTextView becomeFirstResponder];
   }
 }
-
-
 
 @end

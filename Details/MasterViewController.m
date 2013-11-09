@@ -13,10 +13,17 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+  [[UINavigationBar appearance] setTitleTextAttributes:
+   [NSDictionary dictionaryWithObjectsAndKeys:
+    [UIColor darkGrayColor], NSForegroundColorAttributeName,
+    [UIFont fontWithName:@"ArialMT" size:16.0], NSFontAttributeName,nil]];
+
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
   
   notes = [[NSMutableArray alloc] init];
   
@@ -27,17 +34,12 @@
                                                name:@"AccountLinked"
                                              object: nil];
   
-  BOOL isAccountLinked = [DBAccountManager sharedManager].linkedAccount.isLinked;
-  if (!isAccountLinked) {
-    [[DBAccountManager sharedManager] linkFromController:self];
-  }
-  
   UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
   [refreshControl addTarget:self action:@selector(refreshNotes:) forControlEvents:UIControlEventValueChanged];
   [self setRefreshControl:refreshControl];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
   [self refreshNotes];
 }
 
@@ -68,7 +70,6 @@
   if (error) {
     NSLog(@"%@", error);
   }
-
 
   cell.textLabel.text = fileContents;
   
@@ -114,6 +115,13 @@
 }
 
 - (IBAction)addNote:(id)sender {
+  BOOL isAccountLinked = [DBAccountManager sharedManager].linkedAccount.isLinked;
+  
+  if (!isAccountLinked) {
+    [[DBAccountManager sharedManager] linkFromController:self];
+    return;
+  }
+
   NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
   [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss"];
   NSString* date = [dateFormatter stringFromDate:[[NSDate alloc] init]];
