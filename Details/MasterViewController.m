@@ -47,10 +47,8 @@
   UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
   [refreshControl addTarget:self action:@selector(refreshNotes:) forControlEvents:UIControlEventValueChanged];
   [self setRefreshControl:refreshControl];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-//  [self refreshNotes];
+  
+  [self refreshNotes];
 }
 
 #pragma mark - Table View
@@ -105,8 +103,7 @@
     [notes removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
-  } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-  }
+  } else if (editingStyle == UITableViewCellEditingStyleInsert) { }
   
   if (notes.count <= 0) {
     [self performSelector:@selector(finishEditing) withObject:nil afterDelay:0.1];
