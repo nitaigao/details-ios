@@ -39,12 +39,15 @@
                                                name:@"AccountLinked"
                                              object: nil];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(refreshNotes)
+                                               name:@"NoteSaved"
+                                             object:nil];
+  
   UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
   [refreshControl addTarget:self action:@selector(refreshNotes:) forControlEvents:UIControlEventValueChanged];
   [self setRefreshControl:refreshControl];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
+  
   [self refreshNotes];
 }
 
@@ -71,6 +74,7 @@
   }
   
   NSString* fileContents = [file readString:&error];
+  [file close];
 
   if (error) {
     NSLog(@"%@", error);
@@ -99,8 +103,7 @@
     [notes removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
-  } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-  }
+  } else if (editingStyle == UITableViewCellEditingStyleInsert) { }
   
   if (notes.count <= 0) {
     [self performSelector:@selector(finishEditing) withObject:nil afterDelay:0.1];
@@ -134,7 +137,8 @@
   
   DBError* error = nil;
   DBPath* path = [[DBPath alloc] initWithString:filename];
-  [[DBFilesystem sharedFilesystem] createFile:path error:&error];
+  DBFile* file = [[DBFilesystem sharedFilesystem] createFile:path error:&error];
+  [file close];
   
   if (error) {
     NSLog(@"%@", error);
@@ -149,7 +153,6 @@
   [notes insertObject:fileInfo atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-  
   [self performSegueWithIdentifier:@"showDetail" sender:self];
 }
 

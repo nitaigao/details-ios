@@ -37,14 +37,16 @@
       NSLog(@"%@", error);
     }
   }
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"NoteSaved" object:nil];
 }
 
 - (void)enterBackground {
-  [self saveNote];
+  [self performSelectorInBackground:@selector(saveNote) withObject:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-  [self saveNote];
+  [self performSelectorInBackground:@selector(saveNote) withObject:nil];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self.navigationController popToRootViewControllerAnimated:YES];
 }
