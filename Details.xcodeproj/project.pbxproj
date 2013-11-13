@@ -141,6 +141,7 @@
 		4C1AF2A2182CD63F000CE129 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				4C6828C51833C4D200302BDA /* iPad */,
 				4C1AF2D7182CD70F000CE129 /* NoteList */,
 				4C1AF2D6182CD6FE000CE129 /* Edit */,
 				4C1AF2AB182CD63F000CE129 /* AppDelegate.h */,
@@ -197,6 +198,13 @@
 				4C1AF2B2182CD63F000CE129 /* MasterViewController.m */,
 			);
 			name = NoteList;
+			sourceTree = "<group>";
+		};
+		4C6828C51833C4D200302BDA /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,7 +479,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
 				INFOPLIST_FILE = "Details/Details-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = Details;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -491,7 +501,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
 				INFOPLIST_FILE = "Details/Details-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = Details;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

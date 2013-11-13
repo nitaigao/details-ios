@@ -26,16 +26,20 @@
   return YES;
 }
 
+- (void)syncCheck {
+  while (![DBFilesystem sharedFilesystem].completedFirstSync) { }
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"AccountLinked" object:nil];
+}
+
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
   sourceApplication:(NSString *)source annotation:(id)annotation {
+  
   DBAccount* account = [[DBAccountManager sharedManager] handleOpenURL:url];
   
-
   if (account) {
     DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
     [DBFilesystem setSharedFilesystem:filesystem];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"AccountLinked" object:nil];
+    [self performSelectorInBackground:@selector(syncCheck) withObject:nil];
     
     return YES;
   }

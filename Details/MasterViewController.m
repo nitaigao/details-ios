@@ -75,13 +75,12 @@
   
   NSString* fileContents = [file readString:&error];
   [file close];
-
+  
   if (error) {
     NSLog(@"%@", error);
   }
-
-  cell.textLabel.text = fileContents;
   
+  cell.textLabel.text = fileContents;
   return cell;
 }
 
@@ -131,7 +130,7 @@
   }
 
   NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss"];
+  [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
   NSString* date = [dateFormatter stringFromDate:[[NSDate alloc] init]];
   NSString* filename = [NSString stringWithFormat:@"%@.txt", date];
   
@@ -170,8 +169,8 @@
   
   [notes removeAllObjects];
   [notes addObjectsFromArray:sortedArray];
-  
-  [self.tableView reloadData];
+
+  [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 - (void)refreshNotes {
