@@ -3,6 +3,7 @@
 #import <Dropbox/Dropbox.h>
 
 #import "DetailViewController.h"
+#import "NoteType.h"
 
 @interface MasterViewController () {
   NSMutableArray *notes;
@@ -32,12 +33,10 @@
   
   notes = [[NSMutableArray alloc] init];
   
-  self.navigationItem.leftBarButtonItem = self.editButtonItem;
-  
   [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(refreshNotes)
+                                           selector:@selector(accountLinked)
                                                name:@"AccountLinked"
-                                             object: nil];
+                                             object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(refreshNotes)
@@ -64,23 +63,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
   
-  DBFileInfo* fileInfo = [notes objectAtIndex:indexPath.row];
-  
-  DBError* error = nil;
-  DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
-  
-  if (error) {
-    NSLog(@"%@", error);
+  if (notes.count > indexPath.row) {
+    NoteType* noteType = [notes objectAtIndex:indexPath.row];
+    cell.textLabel.text = noteType.title;
   }
   
-  NSString* fileContents = [file readString:&error];
-  [file close];
-  
-  if (error) {
-    NSLog(@"%@", error);
-  }
-  
-  cell.textLabel.text = fileContents;
   return cell;
 }
 
@@ -90,7 +77,8 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
   if (editingStyle == UITableViewCellEditingStyleDelete) {
-    DBFileInfo* fileInfo = [notes objectAtIndex:indexPath.row];
+    NoteType* noteType = [notes objectAtIndex:indexPath.row];
+    DBFileInfo* fileInfo = noteType.fileInfo;
     
     DBError* error = nil;
     [[DBFilesystem sharedFilesystem] deletePath:fileInfo.path error:&error];
@@ -116,8 +104,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
     NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
-    DBFile* file = notes[indexPath.row];
-    [[segue destinationViewController] setDetailItem:file];
+    NoteType* noteType = notes[indexPath.row];
+    [[segue destinationViewController] setDetailItem:noteType];
   }
 }
 
@@ -149,13 +137,15 @@
     NSLog(@"%@", error);
   }
   
-  [notes insertObject:fileInfo atIndex:0];
+  NoteType* noteType = [[NoteType alloc] initWithFileInfo:fileInfo andTitle:@"New Note"];
+  
+  [notes insertObject:noteType atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
   [self performSegueWithIdentifier:@"showDetail" sender:self];
 }
 
-- (void)refreshNotesBackground {
+- (void)refreshNotesBackground {  
   DBError* error = nil;
   NSArray* folderContents = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&error];
   
@@ -168,9 +158,37 @@
   NSArray * sortedArray = [[[folderContents sortedArrayUsingDescriptors:descriptors] reverseObjectEnumerator] allObjects];
   
   [notes removeAllObjects];
-  [notes addObjectsFromArray:sortedArray];
+  
+  for (DBFileInfo* fileInfo in sortedArray) {
+    
+    DBError* error = nil;
+    DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
+    
+    if (error) {
+      NSLog(@"%@", error);
+    }
+    
+    NSString* fileContents = [file readString:&error];
+    [file close];
+    
+    if (error) {
+      NSLog(@"%@", error);
+    }
+    
 
+    NoteType* noteType = [[NoteType alloc] initWithFileInfo:fileInfo andTitle:fileContents];
+    [notes addObject:noteType];
+  }
+  
+  [self performSelectorOnMainThread:@selector(refreshNotesFinished) withObject:nil waitUntilDone:NO];
+}
+
+- (void)refreshNotesFinished {
   [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+
+  if (self.refreshControl.isRefreshing) {
+    [self.refreshControl endRefreshing];
+  }
 }
 
 - (void)refreshNotes {
@@ -178,8 +196,13 @@
 }
 
 - (IBAction)refreshNotes:(id)sender {
+  [self.refreshControl beginRefreshing];
   [self refreshNotes];
-  [(UIRefreshControl *)sender endRefreshing];
+}
+
+- (void)accountLinked {
+  [self.refreshControl beginRefreshing];
+  [self refreshNotes];
 }
 
 @end
