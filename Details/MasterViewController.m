@@ -150,7 +150,7 @@
       NSLog(@"%@", error);
     }
     
-    NSString* fileContents = [file readString:&error];
+    NSString* fileContents = [[[file readString:&error] componentsSeparatedByString:@"\n"] firstObject];
     [file close];
     
     if (error) {
@@ -209,6 +209,25 @@
 - (void)accountLinked {
   [self.refreshControl beginRefreshing];
   [self refreshNotes];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout  *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+  UIDevice* thisDevice = [UIDevice currentDevice];
+
+  if(thisDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+    return CGSizeMake(100, 100);
+  }
+  else {
+    NSInteger margin = 20;
+    if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+      return CGSizeMake([[UIScreen mainScreen] bounds].size.height - margin, 80.f);
+    }
+    return CGSizeMake([[UIScreen mainScreen] bounds].size.width - margin, 80.f);
+  }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+  [self.collectionView performBatchUpdates:nil completion:nil];
 }
 
 @end
