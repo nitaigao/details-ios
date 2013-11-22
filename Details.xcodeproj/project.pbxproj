@@ -29,7 +29,6 @@
 		4C1AF2E9182CD97B000CE129 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E8182CD97B000CE129 /* libc++.dylib */; };
 		4C4B3384182E836D004C5AA0 /* NotesCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B3383182E836D004C5AA0 /* NotesCollectionCellView.m */; };
 		4C683143183D220A001ED0E9 /* NoteType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C683142183D220A001ED0E9 /* NoteType.m */; };
-		4C7D0996183F9C95007A504B /* space-invaders.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C7D0995183F9C95007A504B /* space-invaders.jpg */; };
 		F2FC91A4EFA94432A7726404 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1384A784CDA4FF58776B521 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +73,6 @@
 		4C4B3383182E836D004C5AA0 /* NotesCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesCollectionCellView.m; sourceTree = "<group>"; };
 		4C683141183D220A001ED0E9 /* NoteType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteType.h; sourceTree = "<group>"; };
 		4C683142183D220A001ED0E9 /* NoteType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteType.m; sourceTree = "<group>"; };
-		4C7D0995183F9C95007A504B /* space-invaders.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "space-invaders.jpg"; path = "../../../Desktop/space-invaders.jpg"; sourceTree = "<group>"; };
 		BB3E934E84CA46C1B84C6044 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		D1384A784CDA4FF58776B521 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -149,7 +147,6 @@
 		4C1AF2A2182CD63F000CE129 /* Details */ = {
 			isa = PBXGroup;
 			children = (
-				4C7D0995183F9C95007A504B /* space-invaders.jpg */,
 				4C683140183D21F7001ED0E9 /* Model */,
 				4C1AF2D7182CD70F000CE129 /* NoteList */,
 				4C1AF2D6182CD6FE000CE129 /* Edit */,
@@ -300,7 +297,6 @@
 			files = (
 				4C1AF2B8182CD63F000CE129 /* Images.xcassets in Resources */,
 				4C1AF2A7182CD63F000CE129 /* InfoPlist.strings in Resources */,
-				4C7D0996183F9C95007A504B /* space-invaders.jpg in Resources */,
 				4C1AF2B0182CD63F000CE129 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
