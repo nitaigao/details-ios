@@ -215,7 +215,7 @@
   UIDevice* thisDevice = [UIDevice currentDevice];
 
   if(thisDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-    return CGSizeMake(100, 100);
+    return CGSizeMake(240, 200);
   }
   else {
     NSInteger margin = 20;
@@ -228,6 +228,10 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
   [self.collectionView performBatchUpdates:nil completion:nil];
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+  return YES;
 }
 
 @end
