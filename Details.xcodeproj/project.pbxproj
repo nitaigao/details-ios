@@ -27,8 +27,9 @@
 		4C1AF2E5182CD96E000CE129 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */; };
 		4C1AF2E7182CD973000CE129 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E6182CD973000CE129 /* QuartzCore.framework */; };
 		4C1AF2E9182CD97B000CE129 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E8182CD97B000CE129 /* libc++.dylib */; };
-		4C4B3381182E8033004C5AA0 /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B3380182E8033004C5AA0 /* NotesViewController.m */; };
 		4C4B3384182E836D004C5AA0 /* NotesCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B3383182E836D004C5AA0 /* NotesCollectionCellView.m */; };
+		4C683143183D220A001ED0E9 /* NoteType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C683142183D220A001ED0E9 /* NoteType.m */; };
+		4C7D0996183F9C95007A504B /* space-invaders.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C7D0995183F9C95007A504B /* space-invaders.jpg */; };
 		F2FC91A4EFA94432A7726404 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1384A784CDA4FF58776B521 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -69,10 +70,11 @@
 		4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4C1AF2E6182CD973000CE129 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4C1AF2E8182CD97B000CE129 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		4C4B337F182E8033004C5AA0 /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
-		4C4B3380182E8033004C5AA0 /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
 		4C4B3382182E836D004C5AA0 /* NotesCollectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesCollectionCellView.h; sourceTree = "<group>"; };
 		4C4B3383182E836D004C5AA0 /* NotesCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesCollectionCellView.m; sourceTree = "<group>"; };
+		4C683141183D220A001ED0E9 /* NoteType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteType.h; sourceTree = "<group>"; };
+		4C683142183D220A001ED0E9 /* NoteType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteType.m; sourceTree = "<group>"; };
+		4C7D0995183F9C95007A504B /* space-invaders.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "space-invaders.jpg"; path = "../../../Desktop/space-invaders.jpg"; sourceTree = "<group>"; };
 		BB3E934E84CA46C1B84C6044 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		D1384A784CDA4FF58776B521 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,6 +149,8 @@
 		4C1AF2A2182CD63F000CE129 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				4C7D0995183F9C95007A504B /* space-invaders.jpg */,
+				4C683140183D21F7001ED0E9 /* Model */,
 				4C1AF2D7182CD70F000CE129 /* NoteList */,
 				4C1AF2D6182CD6FE000CE129 /* Edit */,
 				4C1AF2AB182CD63F000CE129 /* AppDelegate.h */,
@@ -201,12 +205,19 @@
 			children = (
 				4C1AF2B1182CD63F000CE129 /* MasterViewController.h */,
 				4C1AF2B2182CD63F000CE129 /* MasterViewController.m */,
-				4C4B337F182E8033004C5AA0 /* NotesViewController.h */,
-				4C4B3380182E8033004C5AA0 /* NotesViewController.m */,
 				4C4B3382182E836D004C5AA0 /* NotesCollectionCellView.h */,
 				4C4B3383182E836D004C5AA0 /* NotesCollectionCellView.m */,
 			);
 			name = NoteList;
+			sourceTree = "<group>";
+		};
+		4C683140183D21F7001ED0E9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4C683141183D220A001ED0E9 /* NoteType.h */,
+				4C683142183D220A001ED0E9 /* NoteType.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +300,7 @@
 			files = (
 				4C1AF2B8182CD63F000CE129 /* Images.xcassets in Resources */,
 				4C1AF2A7182CD63F000CE129 /* InfoPlist.strings in Resources */,
+				4C7D0996183F9C95007A504B /* space-invaders.jpg in Resources */,
 				4C1AF2B0182CD63F000CE129 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,11 +353,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C4B3381182E8033004C5AA0 /* NotesViewController.m in Sources */,
 				4C1AF2AD182CD63F000CE129 /* AppDelegate.m in Sources */,
 				4C4B3384182E836D004C5AA0 /* NotesCollectionCellView.m in Sources */,
 				4C1AF2B3182CD63F000CE129 /* MasterViewController.m in Sources */,
 				4C1AF2A9182CD63F000CE129 /* main.m in Sources */,
+				4C683143183D220A001ED0E9 /* NoteType.m in Sources */,
 				4C1AF2B6182CD63F000CE129 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,7 +495,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
 				INFOPLIST_FILE = "Details/Details-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = Details;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -503,7 +517,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
 				INFOPLIST_FILE = "Details/Details-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = Details;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

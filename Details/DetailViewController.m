@@ -1,6 +1,7 @@
 #import "DetailViewController.h"
 
 #import <Dropbox/Dropbox.h>
+#import "NoteType.h"
 
 @implementation DetailViewController
 
@@ -11,32 +12,29 @@
 }
 
 - (void)saveNote {
-  DBFileInfo* fileInfo = self.detailItem;
+  NoteType* noteType = self.detailItem;
+  DBFileInfo* fileInfo = noteType.fileInfo;
+  
+  DBError* error = nil;
+  
+  DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
+  
+  if (error) {
+    NSLog(@"%@", error);
+  }
   
   if (self.noteTextView.text.length > 0) {
-    DBError* error = nil;
-    
-    DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
-    
-    if (error) {
-      NSLog(@"%@", error);
-    }
-    
     [file writeString:self.noteTextView.text error:&error];
-    [file close];
-    
-    if (error) {
-      NSLog(@"%@", error);
-    }
   }
   else {
-    DBError* error = nil;
-    [[DBFilesystem sharedFilesystem] deletePath:fileInfo.path error:&error];
-    
-    if (error) {
-      NSLog(@"%@", error);
-    }
+    [file writeString:@"New Note" error:&error];
   }
+
+  if (error) {
+    NSLog(@"%@", error);
+  }
+
+  [file close];
   
   [[NSNotificationCenter defaultCenter] postNotificationName:@"NoteSaved" object:nil];
 }
@@ -60,7 +58,8 @@
 - (void)viewWillAppear:(BOOL)animated {
   if (self.detailItem) {
     DBError* error = nil;
-    DBFileInfo* fileInfo = self.detailItem;
+    NoteType* noteType = self.detailItem;
+    DBFileInfo* fileInfo = noteType.fileInfo;
     
     DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
     

@@ -2,7 +2,9 @@
 
 @class DBAccount;
 
-@interface MasterViewController : UITableViewController
+@interface MasterViewController : UICollectionViewController
+
+@property (nonatomic, strong) UIRefreshControl* refreshControl;
 
 - (void)refreshNotes;
 

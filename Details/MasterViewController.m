@@ -2,7 +2,9 @@
 
 #import <Dropbox/Dropbox.h>
 
+#import "NotesCollectionCellView.h"
 #import "DetailViewController.h"
+#import "NoteType.h"
 
 @interface MasterViewController () {
   NSMutableArray *notes;
@@ -10,6 +12,8 @@
 @end
 
 @implementation MasterViewController
+
+@synthesize refreshControl;
 
 - (void)awakeFromNib {
   [super awakeFromNib];
@@ -32,93 +36,57 @@
   
   notes = [[NSMutableArray alloc] init];
   
-  self.navigationItem.leftBarButtonItem = self.editButtonItem;
-  
   [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(refreshNotes)
+                                           selector:@selector(accountLinked)
                                                name:@"AccountLinked"
-                                             object: nil];
+                                             object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(refreshNotes)
                                                name:@"NoteSaved"
                                              object:nil];
   
-  UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+  self.refreshControl = [[UIRefreshControl alloc] init];
   [refreshControl addTarget:self action:@selector(refreshNotes:) forControlEvents:UIControlEventValueChanged];
-  [self setRefreshControl:refreshControl];
+  [self.collectionView addSubview:refreshControl];
+  self.collectionView.alwaysBounceVertical = YES;
   
   [self refreshNotes];
 }
 
-#pragma mark - Table View
+#pragma mark - Collection View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
   return notes.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+  NotesCollectionCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
   
-  DBFileInfo* fileInfo = [notes objectAtIndex:indexPath.row];
+  NSArray* gestureRecognizers = [NSArray arrayWithArray:cell.gestureRecognizers];
   
-  DBError* error = nil;
-  DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
-  
-  if (error) {
-    NSLog(@"%@", error);
+  for (UIGestureRecognizer* gestureRecognizer in gestureRecognizers) {
+    [cell removeGestureRecognizer:gestureRecognizer];
   }
   
-  NSString* fileContents = [file readString:&error];
-  [file close];
-
-  if (error) {
-    NSLog(@"%@", error);
+  UILongPressGestureRecognizer *longpressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deleteNote:)];
+  longpressGesture.minimumPressDuration = 2;
+  [cell addGestureRecognizer:longpressGesture];
+  cell.tag = indexPath.row;
+  
+  if (notes.count > indexPath.row) {
+    NoteType* noteType = [notes objectAtIndex:indexPath.row];
+    cell.previewView.text = noteType.title;
   }
 
-  cell.textLabel.text = fileContents;
-  
   return cell;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-  return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (editingStyle == UITableViewCellEditingStyleDelete) {
-    DBFileInfo* fileInfo = [notes objectAtIndex:indexPath.row];
-    
-    DBError* error = nil;
-    [[DBFilesystem sharedFilesystem] deletePath:fileInfo.path error:&error];
-    
-    if (error) {
-      NSLog(@"%@", error);
-    }
-    
-    [notes removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    
-  } else if (editingStyle == UITableViewCellEditingStyleInsert) { }
-  
-  if (notes.count <= 0) {
-    [self performSelector:@selector(finishEditing) withObject:nil afterDelay:0.1];
-  }
-}
-
-- (void)finishEditing {
-  [self setEditing:NO animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"showDetail"]) {
-    NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
-    DBFile* file = notes[indexPath.row];
-    [[segue destinationViewController] setDetailItem:file];
+    NSIndexPath* indexPath = [[self.collectionView indexPathsForSelectedItems] firstObject];
+    NoteType* noteType = notes[indexPath.row];
+    [[segue destinationViewController] setDetailItem:noteType];
   }
 }
 
@@ -131,7 +99,7 @@
   }
 
   NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss"];
+  [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
   NSString* date = [dateFormatter stringFromDate:[[NSDate alloc] init]];
   NSString* filename = [NSString stringWithFormat:@"%@.txt", date];
   
@@ -150,13 +118,16 @@
     NSLog(@"%@", error);
   }
   
-  [notes insertObject:fileInfo atIndex:0];
+  NoteType* noteType = [[NoteType alloc] initWithFileInfo:fileInfo andTitle:@"New Note"];
+  
+  [notes insertObject:noteType atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-  [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
+  //[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
   [self performSegueWithIdentifier:@"showDetail" sender:self];
 }
 
-- (void)refreshNotesBackground {
+- (void)refreshNotesBackground {  
   DBError* error = nil;
   NSArray* folderContents = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&error];
   
@@ -169,9 +140,48 @@
   NSArray * sortedArray = [[[folderContents sortedArrayUsingDescriptors:descriptors] reverseObjectEnumerator] allObjects];
   
   [notes removeAllObjects];
-  [notes addObjectsFromArray:sortedArray];
   
-  [self.tableView reloadData];
+  for (DBFileInfo* fileInfo in sortedArray) {
+    
+    DBError* error = nil;
+    DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
+    
+    if (error) {
+      NSLog(@"%@", error);
+    }
+    
+    NSString* fileContents = [file readString:&error];
+    [file close];
+    
+    if (error) {
+      NSLog(@"%@", error);
+    }
+    
+
+    NoteType* noteType = [[NoteType alloc] initWithFileInfo:fileInfo andTitle:fileContents];
+    [notes addObject:noteType];
+  }
+  
+  [self performSelectorOnMainThread:@selector(refreshNotesFinished) withObject:nil waitUntilDone:NO];
+}
+
+- (void)deleteNoteBackground:(NoteType*) noteType {
+  DBFileInfo* fileInfo = noteType.fileInfo;
+  
+  DBError* error = nil;
+  [[DBFilesystem sharedFilesystem] deletePath:fileInfo.path error:&error];
+  
+  if (error) {
+    NSLog(@"%@", error);
+  }
+}
+
+- (void)refreshNotesFinished {
+  [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+
+  if (self.refreshControl.isRefreshing) {
+    [self.refreshControl endRefreshing];
+  }
 }
 
 - (void)refreshNotes {
@@ -179,8 +189,26 @@
 }
 
 - (IBAction)refreshNotes:(id)sender {
+  [self.refreshControl beginRefreshing];
   [self refreshNotes];
-  [(UIRefreshControl *)sender endRefreshing];
+}
+
+- (IBAction)deleteNote:(UILongPressGestureRecognizer *)gestureRecognizer {
+  if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+    UICollectionViewCell *cell = (UICollectionViewCell *)[gestureRecognizer view];
+    NSIndexPath* indexPath = [self.collectionView indexPathForCell:cell];
+    
+    NoteType* noteType = [notes objectAtIndex:indexPath.row];
+    [self performSelectorInBackground:@selector(deleteNoteBackground:) withObject:noteType];
+    
+    [notes removeObjectAtIndex:indexPath.row];
+    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+  }
+}
+
+- (void)accountLinked {
+  [self.refreshControl beginRefreshing];
+  [self refreshNotes];
 }
 
 @end
