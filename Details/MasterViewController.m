@@ -36,6 +36,7 @@
   
   notes = [[NSMutableArray alloc] init];
   
+  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(accountLinked)
                                                name:@"AccountLinked"
@@ -63,23 +64,31 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
   NotesCollectionCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
   
-  NSArray* gestureRecognizers = [NSArray arrayWithArray:cell.gestureRecognizers];
-  
-  for (UIGestureRecognizer* gestureRecognizer in gestureRecognizers) {
-    [cell removeGestureRecognizer:gestureRecognizer];
-  }
-  
-  UILongPressGestureRecognizer *longpressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deleteNote:)];
-  longpressGesture.minimumPressDuration = 2;
-  [cell addGestureRecognizer:longpressGesture];
-  cell.tag = indexPath.row;
-  
   if (notes.count > indexPath.row) {
     NoteType* noteType = [notes objectAtIndex:indexPath.row];
     cell.previewView.text = noteType.title;
   }
 
   return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+  UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
+  
+  CGRect overlayFrame = cell.contentView.frame;
+  UIView *overlayView = [[UIView alloc] initWithFrame:overlayFrame];
+  
+  overlayView.alpha = 0.5f;
+  overlayView.tag = 1;
+  
+  overlayView.backgroundColor = [UIColor lightGrayColor];
+  
+  [cell addSubview:overlayView];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+  UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];  
+  [[cell viewWithTag:1] removeFromSuperview];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -97,87 +106,19 @@
     [[DBAccountManager sharedManager] linkFromController:self];
     return;
   }
-
-  NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
-  NSString* date = [dateFormatter stringFromDate:[[NSDate alloc] init]];
-  NSString* filename = [NSString stringWithFormat:@"%@.txt", date];
   
-  DBError* error = nil;
-  DBPath* path = [[DBPath alloc] initWithString:filename];
-  DBFile* file = [[DBFilesystem sharedFilesystem] createFile:path error:&error];
-  [file close];
-  
-  if (error) {
-    NSLog(@"%@", error);
-  }
-  
-  DBFileInfo* fileInfo = [[DBFilesystem sharedFilesystem] fileInfoForPath:path error:&error];
-  
-  if (error) {
-    NSLog(@"%@", error);
-  }
-  
-  NoteType* noteType = [[NoteType alloc] initWithFileInfo:fileInfo andTitle:@"New Note"];
+  NoteType* noteType = [NoteType createNote];
   
   [notes insertObject:noteType atIndex:0];
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
-  //[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
   [self performSegueWithIdentifier:@"showDetail" sender:self];
 }
 
-- (void)refreshNotesBackground {  
-  DBError* error = nil;
-  NSArray* folderContents = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&error];
-  
-  if (error) {
-    NSLog(@"%@", error);
-  }
-  
-  NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"path.name" ascending:YES];
-  NSArray * descriptors = [NSArray arrayWithObject:valueDescriptor];
-  NSArray * sortedArray = [[[folderContents sortedArrayUsingDescriptors:descriptors] reverseObjectEnumerator] allObjects];
-  
+- (void)refreshNotesFinished:(NSArray*)refreshedNotes {
   [notes removeAllObjects];
-  
-  for (DBFileInfo* fileInfo in sortedArray) {
-    
-    DBError* error = nil;
-    DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
-    
-    if (error) {
-      NSLog(@"%@", error);
-    }
-    
-    NSString* fileContents = [[[file readString:&error] componentsSeparatedByString:@"\n"] firstObject];
-    [file close];
-    
-    if (error) {
-      NSLog(@"%@", error);
-    }
-    
-
-    NoteType* noteType = [[NoteType alloc] initWithFileInfo:fileInfo andTitle:fileContents];
-    [notes addObject:noteType];
-  }
-  
-  [self performSelectorOnMainThread:@selector(refreshNotesFinished) withObject:nil waitUntilDone:NO];
-}
-
-- (void)deleteNoteBackground:(NoteType*) noteType {
-  DBFileInfo* fileInfo = noteType.fileInfo;
-  
-  DBError* error = nil;
-  [[DBFilesystem sharedFilesystem] deletePath:fileInfo.path error:&error];
-  
-  if (error) {
-    NSLog(@"%@", error);
-  }
-}
-
-- (void)refreshNotesFinished {
-  [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+  [notes addObjectsFromArray:refreshedNotes];
+  [self.collectionView reloadData];
 
   if (self.refreshControl.isRefreshing) {
     [self.refreshControl endRefreshing];
@@ -185,25 +126,14 @@
 }
 
 - (void)refreshNotes {
-  [self performSelectorInBackground:@selector(refreshNotesBackground) withObject:nil];
+  [NoteType refreshNotes:^(NSArray *refreshedNotes) {
+    [self performSelectorOnMainThread:@selector(refreshNotesFinished:) withObject:refreshedNotes waitUntilDone:NO];
+  }];
 }
 
 - (IBAction)refreshNotes:(id)sender {
   [self.refreshControl beginRefreshing];
   [self refreshNotes];
-}
-
-- (IBAction)deleteNote:(UILongPressGestureRecognizer *)gestureRecognizer {
-  if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-    UICollectionViewCell *cell = (UICollectionViewCell *)[gestureRecognizer view];
-    NSIndexPath* indexPath = [self.collectionView indexPathForCell:cell];
-    
-    NoteType* noteType = [notes objectAtIndex:indexPath.row];
-    [self performSelectorInBackground:@selector(deleteNoteBackground:) withObject:noteType];
-    
-    [notes removeObjectAtIndex:indexPath.row];
-    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-  }
 }
 
 - (void)accountLinked {

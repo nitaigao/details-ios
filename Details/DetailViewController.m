@@ -3,6 +3,8 @@
 #import <Dropbox/Dropbox.h>
 #import "NoteType.h"
 
+#import "MasterViewController.h"
+
 @implementation DetailViewController
 
 #pragma mark - Managing the detail item
@@ -11,42 +13,18 @@
   [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
 }
 
-- (void)saveNote {
-  NoteType* noteType = self.detailItem;
-  DBFileInfo* fileInfo = noteType.fileInfo;
-  
-  DBError* error = nil;
-  
-  DBFile* file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
-  
-  if (error) {
-    NSLog(@"%@", error);
-  }
-  
-  if (self.noteTextView.text.length > 0) {
-    [file writeString:self.noteTextView.text error:&error];
-  }
-  else {
-    [file writeString:@"New Note" error:&error];
-  }
+- (void)scheduledSaveNote:(NSTimer *)timer {
+  NoteType* noteType = timer.userInfo;
+  [noteType save:self.noteTextView.text];
 
-  if (error) {
-    NSLog(@"%@", error);
+  if (self.navigationController.topViewController != self) {
+    [timer invalidate];
   }
-
-  [file close];
-  
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"NoteSaved" object:nil];
-}
-
-- (void)enterBackground {
-  [self performSelectorInBackground:@selector(saveNote) withObject:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-  [self performSelectorInBackground:@selector(saveNote) withObject:nil];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self.navigationController popToRootViewControllerAnimated:YES];
+//  [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setDetailItem:(id)newDetailItem {
@@ -112,11 +90,19 @@
 - (void)viewDidAppear:(BOOL)animated {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterBackground) name:UIApplicationWillResignActiveNotification object:nil];
   
   if (self.noteTextView.text.length <= 0) {
     [self.noteTextView becomeFirstResponder];
   }
+  
+  NoteType* noteType = self.detailItem;
+  [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(scheduledSaveNote:) userInfo:noteType repeats:YES];
+}
+
+- (IBAction)deleteNote:(id)sender {
+  NoteType* noteType = self.detailItem;
+  [noteType delete];
+  [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

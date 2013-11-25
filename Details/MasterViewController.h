@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 
 @class DBAccount;
+@class NoteType;
 
 @interface MasterViewController : UICollectionViewController
 
