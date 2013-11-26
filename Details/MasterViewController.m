@@ -66,29 +66,20 @@
   
   if (notes.count > indexPath.row) {
     NoteType* noteType = [notes objectAtIndex:indexPath.row];
-    cell.previewView.text = noteType.title;
+    [cell setTitle:noteType.title];
   }
 
   return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-  UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
-  
-  CGRect overlayFrame = cell.contentView.frame;
-  UIView *overlayView = [[UIView alloc] initWithFrame:overlayFrame];
-  
-  overlayView.alpha = 0.5f;
-  overlayView.tag = 1;
-  
-  overlayView.backgroundColor = [UIColor lightGrayColor];
-  
-  [cell addSubview:overlayView];
+  NotesCollectionCellView* cell = (NotesCollectionCellView*)[collectionView cellForItemAtIndexPath:indexPath];
+  [cell enableHighlight];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-  UICollectionViewCell* cell = [collectionView cellForItemAtIndexPath:indexPath];  
-  [[cell viewWithTag:1] removeFromSuperview];
+  NotesCollectionCellView* cell = (NotesCollectionCellView*)[collectionView cellForItemAtIndexPath:indexPath];
+  [cell disableHighlight];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

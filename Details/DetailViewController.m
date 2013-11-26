@@ -5,6 +5,12 @@
 
 #import "MasterViewController.h"
 
+@interface DetailViewController() {
+  NSString* lastBody;
+}
+
+@end
+
 @implementation DetailViewController
 
 #pragma mark - Managing the detail item
@@ -14,12 +20,16 @@
 }
 
 - (void)scheduledSaveNote:(NSTimer *)timer {
-  NoteType* noteType = timer.userInfo;
-  [noteType save:self.noteTextView.text];
-
-  if (self.navigationController.topViewController != self) {
-    [timer invalidate];
+  if (lastBody && NSOrderedSame != [lastBody compare:self.noteTextView.text]) {
+    NoteType* noteType = timer.userInfo;
+    [noteType save:self.noteTextView.text];
+    
+    if (self.navigationController.topViewController != self) {
+      [timer invalidate];
+    }
   }
+  
+  lastBody = self.noteTextView.text;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -29,7 +39,7 @@
 
 - (void)setDetailItem:(id)newDetailItem {
   if (_detailItem != newDetailItem) {
-    _detailItem = newDetailItem;    
+    _detailItem = newDetailItem;
   }
 }
 

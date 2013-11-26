@@ -25,7 +25,27 @@
 }
 
 - (void)prepareForReuse {
+  [self disableHighlight];
+}
+
+- (void)enableHighlight {
+  CGRect overlayFrame = self.contentView.frame;
+  UIView *overlayView = [[UIView alloc] initWithFrame:overlayFrame];
+  
+  overlayView.alpha = 0.5f;
+  overlayView.tag = 1;
+  
+  overlayView.backgroundColor = [UIColor lightGrayColor];
+  
+  [self addSubview:overlayView];
+}
+
+- (void)disableHighlight {
   [[self viewWithTag:1] removeFromSuperview];
+}
+
+- (void)setTitle:(NSString *)title {
+  self.previewView.text = title;
 }
 
 @end
