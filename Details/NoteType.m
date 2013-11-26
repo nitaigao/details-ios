@@ -6,10 +6,18 @@
 
 @synthesize fileInfo, title;
 
-- (id)initWithFileInfo:(DBFileInfo*)theFileInfo andTitle:(NSString*)theTitle {
+- (id)initWithFileInfo:(DBFileInfo*)theFileInfo {
   self = [super init];
   if (self) {
     self.fileInfo = theFileInfo;
+    [self setTitleFromBody:@""];
+  }
+  return self;
+}
+
+- (id)initWithFileInfo:(DBFileInfo*)theFileInfo andTitle:(NSString*)theTitle {
+  self = [self initWithFileInfo:theFileInfo];
+  if (self) {
     [self setTitleFromBody:theTitle];
   }
   return self;
@@ -24,12 +32,7 @@
     NSLog(@"%@", error);
   }
   
-  if (noteText.length > 0) {
-    [file writeString:noteText error:&error];
-  }
-  else {
-    [file writeString:@"New Note" error:&error];
-  }
+  [file writeString:noteText error:&error];
   
   if (error) {
     NSLog(@"%@", error);
@@ -79,7 +82,7 @@
     NSLog(@"%@", error);
   }
   
-  NoteType* noteType = [[NoteType alloc] initWithFileInfo:fileInfo andTitle:@"New Note"];
+  NoteType* noteType = [[NoteType alloc] initWithFileInfo:fileInfo];
   
   return noteType;
 }
@@ -126,7 +129,9 @@
 }
 
 - (void)setTitleFromBody:(NSString *)body {
-  NSString* newTitle = [[body componentsSeparatedByString:@"\n"] firstObject];
+  NSString* noteTitle = body.length > 0 ? body : @"Empty Note";
+  
+  NSString* newTitle = [[noteTitle componentsSeparatedByString:@"\n"] firstObject];
   self.title = newTitle;
 }
 

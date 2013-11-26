@@ -21,7 +21,7 @@
 
 - (void)finishedEditing {
   NoteType* noteType = (NoteType*)self.detailItem;
-  [noteType setTitle:self.noteTextView.text];
+  [noteType setTitleFromBody:self.noteTextView.text];
   
   MasterViewController *parent = (MasterViewController *)[self.navigationController.viewControllers firstObject];
   [parent refreshSelectedItem:noteType];
