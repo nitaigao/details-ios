@@ -98,7 +98,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="cra-N8-TIN">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="trash" id="GoH-I6-Neb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="GoH-I6-Neb">
                             <connections>
                                 <action selector="deleteNote:" destination="Ah7-4n-0Wa" id="aTO-Bf-47e"/>
                             </connections>
