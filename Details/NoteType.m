@@ -10,8 +10,7 @@
   self = [super init];
   if (self) {
     self.fileInfo = theFileInfo;
-    self.title = theTitle;
-
+    [self setTitleFromBody:theTitle];
   }
   return self;
 }
@@ -108,7 +107,7 @@
       NSLog(@"%@", error);
     }
     
-    NSString* fileContents = [[[file readString:&error] componentsSeparatedByString:@"\n"] firstObject];
+    NSString* fileContents = [file readString:&error];
     [file close];
     
     if (error) {
@@ -126,5 +125,9 @@
   [self performSelectorInBackground:@selector(refreshNotesBackground:) withObject:refreshCompleteHandler];
 }
 
+- (void)setTitleFromBody:(NSString *)body {
+  NSString* newTitle = [[body componentsSeparatedByString:@"\n"] firstObject];
+  self.title = newTitle;
+}
 
 @end

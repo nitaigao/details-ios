@@ -42,11 +42,6 @@
                                                name:@"AccountLinked"
                                              object:nil];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(refreshNotes)
-                                               name:@"NoteSaved"
-                                             object:nil];
-  
   self.refreshControl = [[UIRefreshControl alloc] init];
   [refreshControl addTarget:self action:@selector(refreshNotes:) forControlEvents:UIControlEventValueChanged];
   [self.collectionView addSubview:refreshControl];
@@ -153,6 +148,25 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
   return YES;
+}
+
+- (void)deleteSelectedItem {
+  NSArray* indexPaths = [self.collectionView indexPathsForSelectedItems];
+  NSIndexPath* indexPath = [indexPaths firstObject];
+  
+  NoteType* noteType = [notes objectAtIndex:indexPath.row];
+  [notes removeObjectAtIndex:indexPath.row];
+  
+  [self.collectionView deleteItemsAtIndexPaths:indexPaths];
+  
+  [noteType delete];
+}
+
+- (void)refreshSelectedItem:(NoteType*)noteType {
+  NSArray* indexPaths = [self.collectionView indexPathsForSelectedItems];
+  NSIndexPath* indexPath = [indexPaths firstObject];
+  [notes replaceObjectAtIndex:indexPath.row withObject:noteType];
+  [self.collectionView reloadData];
 }
 
 @end

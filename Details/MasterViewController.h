@@ -12,4 +12,7 @@
 - (IBAction)refreshNotes:(id)sender;
 - (IBAction)addNote:(id)sender;
 
+- (void)deleteSelectedItem;
+- (void)refreshSelectedItem:(NoteType*)noteType;
+
 @end

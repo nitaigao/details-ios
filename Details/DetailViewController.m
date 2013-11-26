@@ -19,22 +19,38 @@
   [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
 }
 
+- (void)finishedEditing {
+  NoteType* noteType = (NoteType*)self.detailItem;
+  [noteType setTitle:self.noteTextView.text];
+  
+  MasterViewController *parent = (MasterViewController *)[self.navigationController.viewControllers firstObject];
+  [parent refreshSelectedItem:noteType];
+  
+  [self.navigationController popToRootViewControllerAnimated:YES];
+  
+  [noteType save:self.noteTextView.text];
+}
+
 - (void)scheduledSaveNote:(NSTimer *)timer {
+  if (!lastBody) {
+    NoteType* noteType = timer.userInfo;
+    [noteType save:self.noteTextView.text];
+  }
+  
   if (lastBody && NSOrderedSame != [lastBody compare:self.noteTextView.text]) {
     NoteType* noteType = timer.userInfo;
     [noteType save:self.noteTextView.text];
-    
-    if (self.navigationController.topViewController != self) {
-      [timer invalidate];
-    }
   }
   
   lastBody = self.noteTextView.text;
+  
+  if (self.navigationController.topViewController != self) {
+    [timer invalidate];
+  }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-//  [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setDetailItem:(id)newDetailItem {
@@ -63,7 +79,13 @@
     
     self.noteTextView.text = fileContents;
   }
+  
+  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: @"Details"
+                                                                           style: self.navigationController.navigationItem.leftBarButtonItem.style
+                                                                          target: self
+                                                                          action: @selector(finishedEditing)];
 }
+
 
 - (void)moveTextViewForKeyboard:(NSNotification*)aNotification up:(BOOL)up {
   NSDictionary* userInfo = [aNotification userInfo];
@@ -110,9 +132,9 @@
 }
 
 - (IBAction)deleteNote:(id)sender {
-  NoteType* noteType = self.detailItem;
-  [noteType delete];
   [self.navigationController popToRootViewControllerAnimated:YES];
+  MasterViewController *parent = (MasterViewController *)[self.navigationController.viewControllers firstObject];
+  [parent deleteSelectedItem];
 }
 
 @end

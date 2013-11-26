@@ -106,9 +106,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="noteTextView" destination="ktC-Ad-hLM" id="69h-Cr-Xtu"/>
+                        <segue destination="gI5-Ej-YUH" kind="unwind" unwindAction="unwindToMainMenu:" id="jfn-GR-xB1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
+                <exit id="gI5-Ej-YUH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="902" y="64"/>
         </scene>
