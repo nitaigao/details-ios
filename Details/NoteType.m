@@ -132,7 +132,12 @@
   NSString* noteTitle = body.length > 0 ? body : @"Empty Note";
   
   NSString* newTitle = [[noteTitle componentsSeparatedByString:@"\n"] firstObject];
-  self.title = newTitle;
+  
+  NSInteger maxLength = 55;
+  NSInteger titleSubstringIndex = newTitle.length > maxLength ? maxLength - 1 : newTitle.length;
+  NSString* titleString = [newTitle substringToIndex:titleSubstringIndex];
+  
+  self.title = titleString;
 }
 
 @end
