@@ -112,19 +112,19 @@
 }
 
 - (void)refreshNotes {
+  [self.refreshControl beginRefreshing];
   [NoteType refreshNotes:^(NSArray *refreshedNotes) {
     [self performSelectorOnMainThread:@selector(refreshNotesFinished:) withObject:refreshedNotes waitUntilDone:NO];
   }];
 }
 
 - (IBAction)refreshNotes:(id)sender {
-  [self.refreshControl beginRefreshing];
   [self refreshNotes];
 }
 
 - (void)accountLinked {
-  [self.refreshControl beginRefreshing];
-  [self refreshNotes];
+  [self.collectionView setContentOffset:CGPointMake(0, -self.refreshControl.frame.size.height) animated:YES];
+  [self performSelectorOnMainThread:@selector(refreshNotes) withObject:nil waitUntilDone:NO];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout  *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

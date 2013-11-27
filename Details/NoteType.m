@@ -6,6 +6,9 @@
 
 @synthesize fileInfo, title;
 
+static const NSInteger kMaxTitleChars = 55;
+static const NSString* kEmptyTitleText = @"Empty Note";
+
 - (id)initWithFileInfo:(DBFileInfo*)theFileInfo {
   self = [super init];
   if (self) {
@@ -129,15 +132,13 @@
 }
 
 - (void)setTitleFromBody:(NSString *)body {
-  NSString* noteTitle = body.length > 0 ? body : @"Empty Note";
+  NSString* noteTitle = body.length > 0 ? body : kEmptyTitleText;
   
-  NSString* newTitle = [[noteTitle componentsSeparatedByString:@"\n"] firstObject];
+  NSString* titleFirstLine = [[noteTitle componentsSeparatedByString:@"\n"] firstObject];
+  NSInteger titleSubstringIndex = titleFirstLine.length > kMaxTitleChars ? kMaxTitleChars - 1 : titleFirstLine.length;
+  NSString* titleChopped = [titleFirstLine substringToIndex:titleSubstringIndex];
   
-  NSInteger maxLength = 55;
-  NSInteger titleSubstringIndex = newTitle.length > maxLength ? maxLength - 1 : newTitle.length;
-  NSString* titleString = [newTitle substringToIndex:titleSubstringIndex];
-  
-  self.title = titleString;
+  self.title = titleChopped;
 }
 
 @end
