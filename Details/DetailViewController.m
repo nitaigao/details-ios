@@ -17,6 +17,34 @@
 
 - (void)viewDidLoad {
   [self.navigationController.navigationBar setTintColor:[UIColor darkGrayColor]];
+  
+  UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                               action:@selector(editTextRecognizerTabbed:)];
+  recognizer.delegate = self;
+  recognizer.numberOfTapsRequired = 1;
+  [self.noteTextView addGestureRecognizer:recognizer];
+}
+
+- (void) editTextRecognizerTabbed:(UITapGestureRecognizer *) aRecognizer {
+  [self disableTextViewEditing];
+  
+  CGPoint point = [aRecognizer locationInView:self.noteTextView];
+  UITextPosition* position = [self.noteTextView closestPositionToPoint:point];
+  UITextRange* range = [self.noteTextView textRangeFromPosition:position toPosition:position];
+  self.noteTextView.selectedTextRange = range;
+  
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+  return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+  [self resetTextViewEditing];
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+  return YES;
 }
 
 - (void)finishedEditing {
@@ -57,6 +85,17 @@
   if (_detailItem != newDetailItem) {
     _detailItem = newDetailItem;
   }
+}
+
+- (void)disableTextViewEditing {
+  self.noteTextView.dataDetectorTypes = UIDataDetectorTypeNone;
+  self.noteTextView.editable = YES;
+  [self.noteTextView becomeFirstResponder];
+}
+
+- (void)resetTextViewEditing {
+  self.noteTextView.editable = NO;
+  self.noteTextView.dataDetectorTypes = UIDataDetectorTypeAll;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
