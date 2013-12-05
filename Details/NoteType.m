@@ -91,6 +91,9 @@ static const NSString* kEmptyTitleText = @"Empty Note";
 }
 
 + (void)refreshNotesBackground:(void (^) (NSArray* notes))refreshCompleteHandler {
+  
+  while ([DBFilesystem sharedFilesystem].status & DBSyncStatusActive) { };
+  
   DBError* error = nil;
   NSArray* folderContents = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&error];
   
