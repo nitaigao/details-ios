@@ -16,10 +16,14 @@
     [self.layer setBorderWidth:0.5f];
     
     // drop shadow
-//    [self.layer setShadowColor:[UIColor blackColor].CGColor];
-//    [self.layer setShadowOpacity:0.8];
-//    [self.layer setShadowRadius:1.0];
-//    [self.layer setShadowOffset:CGSizeMake(0.0, 0.0)];
+    CALayer *layer = [self layer];
+    [layer setMasksToBounds:NO];
+    [layer setRasterizationScale:[[UIScreen mainScreen] scale]];
+    [layer setShouldRasterize:YES];
+    [layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [layer setShadowOffset:CGSizeMake(0.0f,0.5f)];
+    [layer setShadowRadius:4.0f];
+    [layer setShadowOpacity:0.2f];
   }
   return self;
 }

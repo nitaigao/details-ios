@@ -13,7 +13,7 @@
 - (void)setTitleFromBody:(NSString *)body;
 
 + (NoteType*)createNote;
-+ (void)refreshNotes:(void (^) (NSArray* notes))refreshCompleteHandler;
++ (void)refreshNotes:(void (^) (NoteType* note))noteLoadedHandler;
 
 @property (nonatomic, strong) DBFileInfo* fileInfo;
 @property (nonatomic, strong) NSString* title;

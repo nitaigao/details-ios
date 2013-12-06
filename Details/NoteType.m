@@ -90,7 +90,7 @@ static const NSString* kEmptyTitleText = @"Empty Note";
   return noteType;
 }
 
-+ (void)refreshNotesBackground:(void (^) (NSArray* notes))refreshCompleteHandler {
++ (void)refreshNotesBackground:(void (^) (NoteType* note))noteLoadedHandler {
   
   while ([DBFilesystem sharedFilesystem].status & DBSyncStatusActive) { };
   
@@ -104,8 +104,6 @@ static const NSString* kEmptyTitleText = @"Empty Note";
   NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"path.name" ascending:YES];
   NSArray * descriptors = [NSArray arrayWithObject:valueDescriptor];
   NSArray * sortedArray = [[[folderContents sortedArrayUsingDescriptors:descriptors] reverseObjectEnumerator] allObjects];
-  
-  NSMutableArray* notes = [NSMutableArray array];
   
   for (DBFileInfo* fileInfo in sortedArray) {
     
@@ -124,14 +122,12 @@ static const NSString* kEmptyTitleText = @"Empty Note";
     }
     
     NoteType* noteType = [[NoteType alloc] initWithFileInfo:fileInfo andTitle:fileContents];
-    [notes addObject:noteType];
+    noteLoadedHandler(noteType);
   }
-  
-  refreshCompleteHandler(notes);
 }
 
-+ (void)refreshNotes:(void (^) (NSArray* notes))refreshCompleteHandler {
-  [self performSelectorInBackground:@selector(refreshNotesBackground:) withObject:refreshCompleteHandler];
++ (void)refreshNotes:(void (^) (NoteType* notes))noteLoadedHandler {
+  [self performSelectorInBackground:@selector(refreshNotesBackground:) withObject:noteLoadedHandler];
 }
 
 - (void)setTitleFromBody:(NSString *)body {

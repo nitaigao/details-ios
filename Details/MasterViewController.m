@@ -101,9 +101,16 @@
   [self performSegueWithIdentifier:@"showDetail" sender:self];
 }
 
-- (void)refreshNotesFinished:(NSArray*)refreshedNotes {
-  [notes removeAllObjects];
-  [notes addObjectsFromArray:refreshedNotes];
+- (void)refreshNotesFinished:(NoteType*)note {
+
+  bool noteExists = [notes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NoteType* evaluatedObject, NSDictionary *bindings) {
+    return [evaluatedObject.title compare:note.title] == NSOrderedSame;
+  }]].count > 0;
+  
+  if (!noteExists) {
+    [notes addObject:note];
+  }
+  
   [self.collectionView reloadData];
 
   if (self.refreshControl.isRefreshing) {
@@ -113,8 +120,8 @@
 
 - (void)refreshNotes {
   [self.refreshControl beginRefreshing];
-  [NoteType refreshNotes:^(NSArray *refreshedNotes) {
-    [self performSelectorOnMainThread:@selector(refreshNotesFinished:) withObject:refreshedNotes waitUntilDone:NO];
+  [NoteType refreshNotes:^(NoteType *note) {
+    [self performSelectorOnMainThread:@selector(refreshNotesFinished:) withObject:note waitUntilDone:NO];
   }];
 }
 

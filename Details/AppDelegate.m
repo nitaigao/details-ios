@@ -4,6 +4,8 @@
 
 #import "MasterViewController.h"
 
+//#import <NewRelicAgent/NewRelic.h>
+
 @implementation AppDelegate
 
 @synthesize noteListViewController;
@@ -22,6 +24,8 @@
     DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
     [DBFilesystem setSharedFilesystem:filesystem];
   }
+  
+//  [NewRelicAgent startWithApplicationToken:@"AA2987fe4f95dbdba61387f305231a2b6013f6d516"];
   
   return YES;
 }

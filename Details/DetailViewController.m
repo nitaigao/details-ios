@@ -32,7 +32,6 @@
   UITextPosition* position = [self.noteTextView closestPositionToPoint:point];
   UITextRange* range = [self.noteTextView textRangeFromPosition:position toPosition:position];
   self.noteTextView.selectedTextRange = range;
-  
 }
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {

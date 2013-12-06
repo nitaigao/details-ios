@@ -27,6 +27,8 @@
 		4C1AF2E5182CD96E000CE129 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */; };
 		4C1AF2E7182CD973000CE129 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E6182CD973000CE129 /* QuartzCore.framework */; };
 		4C1AF2E9182CD97B000CE129 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1AF2E8182CD97B000CE129 /* libc++.dylib */; };
+		4C4741581852278E00B8327D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4741571852278E00B8327D /* CoreTelephony.framework */; };
+		4C47415A1852279900B8327D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4741591852279900B8327D /* libz.dylib */; };
 		4C4B3384182E836D004C5AA0 /* NotesCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B3383182E836D004C5AA0 /* NotesCollectionCellView.m */; };
 		4C683143183D220A001ED0E9 /* NoteType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C683142183D220A001ED0E9 /* NoteType.m */; };
 		F2FC91A4EFA94432A7726404 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1384A784CDA4FF58776B521 /* libPods.a */; };
@@ -69,6 +71,8 @@
 		4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4C1AF2E6182CD973000CE129 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4C1AF2E8182CD97B000CE129 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		4C4741571852278E00B8327D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		4C4741591852279900B8327D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		4C4B3382182E836D004C5AA0 /* NotesCollectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesCollectionCellView.h; sourceTree = "<group>"; };
 		4C4B3383182E836D004C5AA0 /* NotesCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesCollectionCellView.m; sourceTree = "<group>"; };
 		4C683141183D220A001ED0E9 /* NoteType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteType.h; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C47415A1852279900B8327D /* libz.dylib in Frameworks */,
+				4C4741581852278E00B8327D /* CoreTelephony.framework in Frameworks */,
 				4C1AF2E9182CD97B000CE129 /* libc++.dylib in Frameworks */,
 				4C1AF2E7182CD973000CE129 /* QuartzCore.framework in Frameworks */,
 				4C1AF2E5182CD96E000CE129 /* SystemConfiguration.framework in Frameworks */,
@@ -130,6 +136,8 @@
 		4C1AF29B182CD63F000CE129 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C4741591852279900B8327D /* libz.dylib */,
+				4C4741571852278E00B8327D /* CoreTelephony.framework */,
 				4C1AF2E8182CD97B000CE129 /* libc++.dylib */,
 				4C1AF2E6182CD973000CE129 /* QuartzCore.framework */,
 				4C1AF2E4182CD96E000CE129 /* SystemConfiguration.framework */,
@@ -492,6 +500,23 @@
 				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
 				INFOPLIST_FILE = "Details/Details-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"-lz",
+					"-framework",
+					CFNetwork,
+					"-framework",
+					CoreTelephony,
+					"-framework",
+					Dropbox,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+				);
 				PRODUCT_NAME = Details;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -514,6 +539,23 @@
 				GCC_PREFIX_HEADER = "Details/Details-Prefix.pch";
 				INFOPLIST_FILE = "Details/Details-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"-lz",
+					"-framework",
+					CFNetwork,
+					"-framework",
+					CoreTelephony,
+					"-framework",
+					Dropbox,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+				);
 				PRODUCT_NAME = Details;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
